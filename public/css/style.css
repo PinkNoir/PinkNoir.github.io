@@ -51,7 +51,6 @@ body {
     margin: 10px;
     line-height: 20px;
     font-size: 2em;
-    /* font-variant: small-caps; */
     text-align: center;
 }
 
@@ -65,7 +64,6 @@ body {
 
 #pink-noir {
     background-image: url("/public/img/pink_noir.png");
-    ;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
