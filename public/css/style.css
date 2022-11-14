@@ -3,28 +3,26 @@
     src: url("/public/fonts/GothamBook.ttf");
 }
 
-@keyframes fadeInOpacity {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
+@keyframes fadeInTop {
+    0% { top: -30px; opacity: 0; }
+    100% { top: 0px; opacity: 1; }
 }
 
-html,
-body {
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+html, body {
     height: 100%;
 }
 
 html {
     font-family: Gotham;
-    color: black;
 }
 
-body,
-a {
+body, a {
     color: #231f20;
 }
 
@@ -54,12 +52,25 @@ body {
     text-align: center;
 }
 
+.flex-item > * {
+    margin: 10px 5px;
+}
+
+.fade-in-top {
+    animation-name: fadeInTop;
+    animation-duration: 1s;
+}
+
 .fade-in {
+    animation-name: fadeIn;
+    animation-duration: 2.5s;
+}
+
+.fade {
     opacity: 1;
-    animation-name: fadeInOpacity;
+    position: relative;
     animation-iteration-count: 1;
-    animation-timing-function: ease-in;
-    animation-duration: 1.5s;
+    animation-timing-function: ease-out;
 }
 
 #pink-noir {
