@@ -58,7 +58,7 @@ body {
 
 .fade-in-top {
     animation-name: fadeInTop;
-    animation-duration: 1s;
+    animation-duration: 2s;
 }
 
 .fade-in {
