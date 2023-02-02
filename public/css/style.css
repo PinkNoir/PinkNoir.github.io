@@ -1,91 +1,110 @@
 @font-face {
-    font-family: Gotham;
-    src: url("/public/fonts/GothamBook.ttf");
+  font-family: Gotham;
+  src: url("/public/fonts/GothamBook.ttf");
 }
 
-@keyframes fadeInTop {
-    0% { top: -30px; opacity: 0; }
-    100% { top: 0px; opacity: 0.9; }
+@keyframes fadeInFromTop {
+  0% { top: -30px; opacity: 0; }
+  100% { top: 0px; opacity: 0.9; }
 }
 
 @keyframes fadeIn {
-    0% { opacity: 0; }
-    50% { opacity: 0; }
-    100% { opacity: 0.9; }
+  0% { opacity: 0; }
+  50% { opacity: 0; }
+  100% { opacity: 0.9; }
 }
 
 html, body {
-    height: 100%;
+  height: 100%;
 }
 
 html {
-    font-family: Gotham;
+  font-size: 16px;
+  font-family: Gotham;
 }
 
 body, a {
-    color: #000000;
-    text-decoration: none;
+  color: #000000;
+  text-decoration: none;
 }
 
 body {
-    margin: 0;
-    background-color: #F9B7B2;
+  margin: 0;
+  background-color: #F9B7B2;
+}
+
+p {
+  margin: 0;
+  line-height: 1em;
+  overflow: visible;
 }
 
 .flex-container {
-    height: 100%;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.row {
-    width: auto;
+.flex-row {
+  width: auto;
 }
 
 .flex-item {
-    padding: 5px;
-    margin: 10px;
-    line-height: 20px;
-    font-size: 2em;
-    text-align: center;
-}
-
-.flex-item > * {
-    margin: 10px 5px;
-}
-
-.fade-in-top {
-    animation-name: fadeInTop;
-    animation-duration: 2s;
-}
-
-.fade-in {
-    animation-name: fadeIn;
-    animation-duration: 2.5s;
+  text-align: center;
 }
 
 .fade {
-    opacity: 0.9;
-    position: relative;
-    animation-iteration-count: 1;
-    animation-timing-function: ease-out;
+  opacity: 0.9;
+  position: relative;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-out;
 }
 
-#follow-me {
-  font-size: 0.6em;
-  margin-top: 1.5em;
-  margin-bottom: 0.3em;
+.fade-in-from-top {
+  animation-name: fadeInFromTop;
+  animation-duration: 2s;
+}
+
+.fade-in {
+  animation-name: fadeIn;
+  animation-duration: 2.5s;
 }
 
 #pink-noir {
-    background-image: url("/public/img/pink_noir.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    display: inline-block;
-    width: 350px;
-    height: 350px;
+  background-image: url("/public/img/pink_noir.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  display: inline-block;
+  width: 350px;
+  height: 350px;
 }
+
+#visit-shop {
+  margin-top: 2em;
+  margin-bottom: 0.5em;
+}
+
+#visit-shop > p {
+  font-size: 2em;
+  line-height: 1.5em;
+}
+
+#follow-me {
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+#follow-me > p {
+  font-size: 1em;
+  line-height: 1.5em;
+}
+
+#socials > a {
+  margin: 0 5px;
+  font-size: 2em;
+}
+
