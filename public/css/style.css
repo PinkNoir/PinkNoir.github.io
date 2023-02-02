@@ -84,8 +84,7 @@ p {
 }
 
 #visit-shop {
-  margin-top: 2em;
-  margin-bottom: 0.5em;
+  margin: 2em 1em 0.5em;
 }
 
 #visit-shop > p {
@@ -94,8 +93,7 @@ p {
 }
 
 #follow-me {
-  margin-top: 1.5em;
-  margin-bottom: 0.5em;
+  margin: 1.5em 1em 0.5em;
 }
 
 #follow-me > p {
