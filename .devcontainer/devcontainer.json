@@ -1,0 +1,49 @@
+{
+  "name": "pinknoir.it",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:26-trixie",
+
+  // Keep node_modules in a volume so the Linux native binaries (esbuild, rollup)
+  // don't clash with the ones installed on the host.
+  "mounts": [
+    "source=${localWorkspaceFolderBasename}-node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume",
+    // Persist Claude Code config, login and sessions across rebuilds
+    "source=${localWorkspaceFolderBasename}-claude,target=/home/node/.claude,type=volume",
+    // Persist shell history across rebuilds
+    "source=${localWorkspaceFolderBasename}-commandhistory,target=/commandhistory,type=volume"
+  ],
+
+  "containerEnv": {
+    // Prevent Vite's `server.open` from trying to launch a browser inside the container
+    "BROWSER": "none",
+    // Keep ~/.claude.json inside the volume too (it normally lives outside ~/.claude)
+    "CLAUDE_CONFIG_DIR": "/home/node/.claude",
+    "HISTFILE": "/commandhistory/.zsh_history"
+  },
+
+  "postCreateCommand": "sudo chown node node_modules /home/node/.claude /commandhistory && npm install",
+
+  "forwardPorts": [5173, 4173],
+  "portsAttributes": {
+    "5173": { "label": "Vite dev", "onAutoForward": "openBrowser" },
+    "4173": { "label": "Vite preview", "onAutoForward": "notify" }
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "anthropic.claude-code",
+        "esbenp.prettier-vscode",
+        "EditorConfig.EditorConfig",
+        "raczzalan.webgl-glsl-editor",
+        "kamikillerto.vscode-colorize"
+      ],
+      "settings": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true,
+        "terminal.integrated.defaultProfile.linux": "zsh"
+      }
+    }
+  },
+
+  "remoteUser": "node"
+}
