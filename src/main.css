@@ -1,0 +1,190 @@
+@import "tailwindcss";
+@import "@fontsource/metropolis/400.css";
+@import "@fontsource/metropolis/500.css";
+@import "@fontsource/metropolis/900.css";
+
+/* label_maker.html is a separate local tool, not part of this page: keep its classes out of the build. */
+@source not "../label_maker.html";
+
+/* Only the brand theme below: no built-in daisyUI themes in the bundle. */
+@plugin "daisyui" {
+  themes: false;
+}
+
+@plugin "daisyui/theme" {
+  name: "pinknoir";
+  default: true;
+  prefersdark: false;
+  color-scheme: light;
+
+  --color-base-100: #f9b7b2;
+  --color-base-200: #f3aaa4;
+  --color-base-300: #eb9d97;
+  --color-base-content: #391628; /* oklch(0.26 0.06 350) — 9.4:1 on rose */
+  --color-primary: #c35f64; /* oklch(0.607 0.128 18.6) — soft rose-red, 2.4:1 on rose */
+  --color-primary-content: #fff4f3;
+  --color-secondary: #391628;
+  --color-secondary-content: #fff4f3;
+  --color-accent: #91323a;
+  --color-accent-content: #fff4f3;
+  --color-neutral: #391628;
+  --color-neutral-content: #fff4f3;
+  --color-info: #91323a;
+  --color-info-content: #fff4f3;
+  --color-success: #91323a;
+  --color-success-content: #fff4f3;
+  --color-warning: #91323a;
+  --color-warning-content: #fff4f3;
+  --color-error: #91323a;
+  --color-error-content: #fff4f3;
+  --radius-selector: 9999px;
+  --radius-field: 9999px;
+  --radius-box: 1.5rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.28rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}
+
+/* Remix icons as CSS masks, generated only for the icons used (icon-[ri--name]). */
+@plugin "@iconify/tailwind4";
+
+@theme {
+  --font-sans: Metropolis, ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  /* Brand rose (#f9b7b2) stays the surface; plum replaces black; deep rose-red is the accent. */
+  --pn-blush: #fbc2be; /* oklch(0.865 0.066 24) */
+  --pn-rose-deep: #f6afac; /* oklch(0.82 0.083 22) */
+  /* Soft accent for decorative parts only (logo script, thread shadow, button shadow tint):
+     2.4:1 on rose, too light for text or controls — those use --color-primary. */
+  --pn-accent-soft: var(--color-primary);
+}
+
+/* Brand rose, full bleed: a soft blush light from above and a faint plum shadow below. */
+.pn-stage {
+  background:
+    radial-gradient(
+      110% 80% at 50% 125%,
+      color-mix(in oklab, var(--color-base-content) 5%, transparent) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      90% 60% at 50% -10%,
+      color-mix(in oklab, var(--color-primary-content) 28%, transparent) 0%,
+      transparent 75%
+    ),
+    linear-gradient(
+      180deg,
+      var(--pn-blush) 0%,
+      var(--color-base-100) 50%,
+      var(--pn-rose-deep) 100%
+    );
+}
+/* Running stitch, drawn in two layers so it reads as raised thread:
+   ::before  thread with top-to-bottom shading, a soft cast shadow and soft recesses where it enters the fabric,
+             multiplied onto the page so it takes on the rose (and grain) underneath;
+   ::after   a thin highlight along the top of each stitch, screened on top.
+   Both sit at 70% opacity and fade out toward the ends. <body> is the stacking context (isolate), so the
+   multiply blends with its rose background and the grain; nothing between body and the stitch may create
+   another one (no z-index on <main>, no opacity animation on .pn-stitch itself). */
+.pn-stitch {
+  position: relative;
+  height: 10px;
+}
+.pn-stitch::before,
+.pn-stitch::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-repeat: repeat-x;
+  background-position: center;
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 22%,
+    #000 78%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 22%,
+    #000 78%,
+    transparent 100%
+  );
+  opacity: 0.7;
+  animation: pn-rise-stitch 0.9s cubic-bezier(0.2, 0.7, 0.3, 1) 0.4s both;
+}
+.pn-stitch::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='10'%3E%3Cdefs%3E%3ClinearGradient id='t' gradientUnits='userSpaceOnUse' x1='0' y1='3.3' x2='0' y2='5.7'%3E%3Cstop offset='0' stop-color='%23c9909c'/%3E%3Cstop offset='.5' stop-color='%23a3677a'/%3E%3Cstop offset='1' stop-color='%236e3b50'/%3E%3C/linearGradient%3E%3Cfilter id='s' x='-50%25' y='-150%25' width='200%25' height='400%25'%3E%3CfeGaussianBlur stdDeviation='.8'/%3E%3C/filter%3E%3Cfilter id='h' x='-100%25' y='-100%25' width='300%25' height='300%25'%3E%3CfeGaussianBlur stdDeviation='.6'/%3E%3C/filter%3E%3C/defs%3E%3Cline x1='4.4' y1='6.6' x2='13.4' y2='6.6' stroke='%236e3b50' stroke-opacity='.65' stroke-width='2.4' stroke-linecap='round' filter='url%28%23s%29'/%3E%3Cellipse cx='2.8' cy='4.5' rx='1.3' ry='1.1' fill='%23451f32' fill-opacity='.45' filter='url%28%23h%29'/%3E%3Cellipse cx='14.2' cy='4.5' rx='1.3' ry='1.1' fill='%23451f32' fill-opacity='.45' filter='url%28%23h%29'/%3E%3Cline x1='4' y1='4.5' x2='13' y2='4.5' stroke='url%28%23t%29' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+}
+.pn-stitch::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='10'%3E%3Cline x1='5.6' y1='3.9' x2='11.2' y2='3.9' stroke='%23fff4f3' stroke-opacity='.6' stroke-width='.7' stroke-linecap='round'/%3E%3C/svg%3E");
+  mix-blend-mode: screen;
+}
+/* Logo colours: "Pink", "noir" and the needle take the main text colour (plum);
+   the "handmade" script and the thread's shadow take the soft accent. */
+.pn-logo-script {
+  color: var(--color-primary);
+}
+/* Paper grain: daisyUI's own noise texture (--fx-noise, defined by the daisyUI stylesheet),
+   laid over the whole page. Components keep --noise: 0, so buttons stay unchanged. */
+.pn-grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1; /* above <body>'s own background (body is isolated), below the content */
+  pointer-events: none;
+  background-image: var(--fx-noise);
+  background-size: 500px 500px; /* the SVG has only a viewBox; without this it stretches to one blurry tile */
+  mix-blend-mode: multiply;
+}
+
+@keyframes pn-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes pn-rise-stitch {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 0.7;
+    transform: none;
+  }
+}
+@keyframes pn-drop {
+  from {
+    opacity: 0;
+    transform: translateY(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.pn-in {
+  animation: pn-rise 0.9s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+}
+.pn-logo-in {
+  animation: pn-drop 1.2s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .pn-in,
+  .pn-logo-in,
+  .pn-stitch::before,
+  .pn-stitch::after {
+    animation: none;
+  }
+}
