@@ -19,6 +19,8 @@
     "@iconify/tailwind4": "^1.2.3",
     "@tailwindcss/vite": "^4.3.3",
     "daisyui": "^5.7.37",
+    "html-minifier-terser": "^7.2.0",
+    "svgo": "^4.1.0",
     "tailwindcss": "^4.3.3",
     "vite": "^8.3.0"
   }
